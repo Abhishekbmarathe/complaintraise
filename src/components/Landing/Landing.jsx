@@ -64,14 +64,16 @@ const Landing = () => {
             </div>
           </div>
         </div>
+        
 
       </div>
       <footer className="bg-gray-400 text-center py-4 text-gray-900 text-sm">
 
         &copy; 2025 Complaint Portal. All rights reserved.
       </footer>
-
+      
     </div>
+    
   )
 }
 
