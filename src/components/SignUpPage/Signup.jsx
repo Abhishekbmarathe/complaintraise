@@ -58,12 +58,16 @@ const Signup = () => {
           </form>
           <p className="mt-4 text-sm text-center text-gray-600">
             Already have an account?{' '}
-            <Link to="/login" className="text-blue-500 hover:underline">
+            <Link to="/login" className="text-purple-700 hover:underline">
               Log In
             </Link>
           </p>
         </div>
       </main>
+      <footer className="bg-gray-400 text-center py-4 text-gray-900 text-sm">
+
+        &copy; 2025 Complaint Portal. All rights reserved.
+      </footer>
     </div>
   );
 };
