@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from '../Nav'
+import Foot from '../Footer'
 
 const Landing = () => {
   return (
@@ -67,10 +68,7 @@ const Landing = () => {
         
 
       </div>
-      <footer className="bg-gray-400 text-center py-4 text-gray-900 text-sm">
-
-        &copy; 2025 Complaint Portal. All rights reserved.
-      </footer>
+    <Foot/>  
       
     </div>
     

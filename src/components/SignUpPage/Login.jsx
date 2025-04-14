@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Nav from '../Nav';
+import Foot from '../Footer';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -55,10 +56,7 @@ const Login = () => {
           </p>
         </div>
       </main>
-      <footer className="bg-gray-400 text-center py-4 text-gray-900 text-sm">
-
-        &copy; 2025 Complaint Portal. All rights reserved.
-      </footer>
+      <Foot/>
     </div>
   );
 };
