@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Nav from '../Nav';
+import Foot from '../Footer';
 
 export default function CompReg() {
     const [formData, setFormData] = useState({ name: '', email: '', message: '', image: null });
@@ -107,9 +108,7 @@ export default function CompReg() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-white text-center py-4 text-gray-500 text-sm">
-                &copy; 2025 Complaint Portal. All rights reserved.
-            </footer>
+            <Foot/>
         </div>
     );
 }
