@@ -1,15 +1,41 @@
-import React from 'react';
+import { React } from 'react';
 import { useForm } from 'react-hook-form'; // Import React Hook Form
 import Nav from '../Nav';
 import Foot from '../Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import axios
+import api from '../Modules/Api';
 
 const Login = () => {
+  const navigate = useNavigate();
   // Initialize React Hook Form
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log('Login data:', data);
+
+    try {
+      const response = await axios.post(api + 'login', {
+        username: data.username,
+        password: data.password,
+      });
+
+      // Handle response from the server (e.g., save token or navigate to a different page)
+      console.log('Login successful:', response.data);
+      alert('Login successful!');
+
+      // Optionally, store token in localStorage or sessionStorage
+      sessionStorage.setItem('TOKEN', response.data.TOKEN);
+
+      // Redirect user to another page after successful login
+      // For example, navigate to the dashboard page
+      // window.location.href = '/dashboard';
+      navigate('/Compreg')
+
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert('Login failed. Please check your credentials and try again.');
+    }
   };
 
   return (
