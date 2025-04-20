@@ -1,18 +1,22 @@
-import { React } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form'; // Import React Hook Form
 import Nav from '../Nav';
 import Foot from '../Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios
 import api from '../Modules/Api';
+import Loader from '../../assets/Loader';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Loader state
+
   // Initialize React Hook Form
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     console.log('Login data:', data);
+    setLoading(true); // Start loader
 
     try {
       const response = await axios.post(api + 'login', {
@@ -28,13 +32,13 @@ const Login = () => {
       sessionStorage.setItem('TOKEN', response.data.TOKEN);
 
       // Redirect user to another page after successful login
-      // For example, navigate to the dashboard page
-      // window.location.href = '/dashboard';
-      navigate('/Compreg')
+      navigate('/Compreg');
 
     } catch (error) {
       console.error('Login failed:', error);
       alert('Login failed. Please check your credentials and try again.');
+    } finally {
+      setLoading(false); // Stop loader
     }
   };
 
@@ -45,7 +49,7 @@ const Login = () => {
         <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
           <h2 className="text-3xl font-bold mb-8 text-center text-teal-700">Log In</h2>
           {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" disabled={loading}>
             {/* Username Input */}
             <div>
               <input
@@ -54,6 +58,7 @@ const Login = () => {
                 placeholder="Username"
                 {...register('username', { required: 'Username is required' })}
                 className={`w-full p-3 border ${errors.username ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400`}
+                disabled={loading}
               />
               {errors.username && (
                 <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>
@@ -68,6 +73,7 @@ const Login = () => {
                 placeholder="Password"
                 {...register('password', { required: 'Password is required' })}
                 className={`w-full p-3 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400`}
+                disabled={loading}
               />
               {errors.password && (
                 <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
@@ -77,9 +83,16 @@ const Login = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-teal-600 text-white py-3 rounded-lg font-medium hover:bg-teal-700 transition"
+              className="w-full bg-teal-600 text-white py-3 rounded-lg font-medium hover:bg-teal-700 transition flex items-center justify-center"
+              disabled={loading}
             >
-              Log In
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <Loader />
+                </div>
+              ) : (
+                'Log In'
+              )}
             </button>
           </form>
 

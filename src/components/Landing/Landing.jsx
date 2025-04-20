@@ -38,8 +38,8 @@ const complaints = [
 ];
 
 const statusColor = {
-  Open: 'text-red-500',
-  Resolved: 'text-green-600',
+  'Open': 'text-red-500',
+  'Resolved': 'text-green-600',
   'In Progress': 'text-yellow-500',
 };
 
