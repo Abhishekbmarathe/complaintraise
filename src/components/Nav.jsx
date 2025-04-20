@@ -1,26 +1,52 @@
-import React from 'react'
-import { Navigate, Link } from 'react-router-dom'
-// import {  } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
-// const navigator = Navigate();
-
   return (
-    // <div>
-      <nav className="text-purple-700 shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-        <Link to="/" className="text-xl font-bold text-purple-700">Complaint Portal</Link>
-        <div className="space-x-4">
-        <Link to="/" className="text-gray-700 hover:text-purple-700">Home</Link>
-          <Link to="/" className="text-gray-700 hover:text-purple-700">About</Link>
-          <Link to="/" className="text-gray-700 hover:text-purple-700">Contact</Link>
-          {/* <Link to="/Compreg" className="text-gray-700 hover:text-blue-500">Login / Signup</Link>
-           */}
-          <Link to="/login" className="text-gray-700 hover:text-purple-700">Login / Signup</Link>
+    <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+      {/* Brand/Logo */}
+      <Link
+        to="/"
+        className="text-2xl font-extrabold text-teal-600 tracking-tight hover:scale-105 transition-transform duration-200"
+      >
+        Complaint Portal
+      </Link>
 
-        </div>
-      </nav>
-    // </div>
-  )
-}
+      {/* Nav Links */}
+      <div className="space-x-4 hidden md:flex items-center">
+        <Link
+          to="/"
+          className="text-slate-700 hover:text-teal-600 transition-colors duration-200 font-medium"
+        >
+          Home
+        </Link>
+        <Link
+          to="/"
+          className="text-slate-700 hover:text-teal-600 transition-colors duration-200 font-medium"
+        >
+          About
+        </Link>
+        <Link
+          to="/"
+          className="text-slate-700 hover:text-teal-600 transition-colors duration-200 font-medium"
+        >
+          Contact
+        </Link>
+        <Link
+          to="/Compreg"
+          className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg transition duration-300 font-medium"
+        >
+          Register Complaint
+        </Link>
+        <Link
+          to="/login"
+          className="border border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white px-4 py-2 rounded-lg transition duration-300 font-medium"
+        >
+          Login / Signup
+        </Link>
+      </div>
+    </nav>
+  );
+};
 
-export default Nav
+export default Nav;
