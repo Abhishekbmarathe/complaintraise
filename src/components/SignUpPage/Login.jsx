@@ -17,23 +17,30 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log('Login data:', data);
     setLoading(true); // Start loader
-
+  
     try {
       const response = await axios.post(api + 'login', {
         username: data.username,
         password: data.password,
       });
-
-      // Handle response from the server (e.g., save token or navigate to a different page)
-      console.log('Login successful:', response.data);
-      alert('Login successful!');
-
-      // Optionally, store token in localStorage or sessionStorage
-      sessionStorage.setItem('TOKEN', response.data.TOKEN);
-
-      // Redirect user to another page after successful login
-      navigate('/Compreg');
-
+  
+      const { TOKEN, result, status, message } = response.data;
+  
+      if (status === true && TOKEN && result) {
+        alert('Login successful!');
+  
+        // Store token and user details in session storage
+        sessionStorage.setItem('TOKEN', TOKEN);
+        sessionStorage.setItem('USER', JSON.stringify(result));
+  
+        // Redirect user to complaint registration page
+        navigate('/Compreg');
+      } else {
+        // Handle failed login attempt
+        alert(message || 'Login failed. Invalid username or password.');
+        // navigate('/login');
+      }
+  
     } catch (error) {
       console.error('Login failed:', error);
       alert('Login failed. Please check your credentials and try again.');
@@ -41,6 +48,8 @@ const Login = () => {
       setLoading(false); // Stop loader
     }
   };
+  
+  
 
   return (
     <div className="login-page min-h-screen bg-gradient-to-br from-green-100 to-teal-100 flex flex-col">
