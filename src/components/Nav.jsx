@@ -13,7 +13,7 @@ const Nav = () => {
       </Link>
 
       {/* Nav Links */}
-      <div className="space-x-4 hidden md:flex items-center">
+      <div className="space-x-4 hidden/ md:flex items-center">
         <Link
           to="/"
           className="text-slate-700 hover:text-teal-600 transition-colors duration-200 font-medium"
