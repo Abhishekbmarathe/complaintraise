@@ -1,7 +1,7 @@
 .dot {
     width: 15px;
     height: 15px;
-    background-color: #b6fbdb;
+    background-color: #7affc1;
     border-radius: 9999px;
     display: inline-block;
     animation: bounce 1s infinite ease-in-out;
