@@ -49,7 +49,7 @@ const Landing = () => {
       <Nav />
 
       <div className="w-4/5 m-auto py-10">
-        <h1 className="text-3xl font-bold text-center mb-8">All Registered Complaints</h1>
+        <h1 className="text-3xl font-bold text-left mb-8">All Registered Complaints</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {complaints.map((complaint) => (
@@ -74,8 +74,10 @@ const Landing = () => {
         </div>
       </div>
 
-      <Foot />
+      <Foot/>
     </div>
+    
+  
   );
 };
 
