@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Nav from '../Nav';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../Modules/Api';
 
 export default function CompReg() {
@@ -26,21 +26,21 @@ export default function CompReg() {
     // formPayload.append('phone', data.phone);
     formPayload.append('description', data.description);
     formPayload.append('location', data.location);
-  
+
     if (data.image1?.[0]) formPayload.append('image1', data.image1[0]);
     if (data.image2?.[0]) formPayload.append('image2', data.image2[0]);
     if (data.image3?.[0]) formPayload.append('image3', data.image3[0]);
-  
+
     const TOKEN = sessionStorage.getItem('TOKEN');
     const USER = JSON.parse(sessionStorage.getItem('USER'));
     const username = USER?.username;
-  
+
     for (let [key, value] of formPayload.entries()) {
       console.log(`${key}:`, value);
     }
-    
+
     console.log(TOKEN, username);
-  
+
     try {
       const response = await axios.post(api + 'complain', formPayload, {
         headers: {
@@ -49,7 +49,7 @@ export default function CompReg() {
           username: username,
         },
       });
-  
+
       console.log(response.data);
       alert('Complaint submitted successfully!');
     } catch (error) {
@@ -57,7 +57,7 @@ export default function CompReg() {
       alert('Failed to submit complaint. Please try again.');
     }
   };
-  
+
 
 
 
@@ -72,7 +72,14 @@ export default function CompReg() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-teal-100 flex flex-col">
       <Nav />
+      <Link
+        to="/manage-comp"
+        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg transition duration-300 font-medium w-fit m-4"
+      >
+        Manage Complaints
+      </Link>
       <main className="flex-grow flex items-center justify-center p-4">
+
         <div className="bg-white w-full max-w-2xl p-8 rounded-2xl shadow-md">
           <h2 className="text-2xl font-semibold text-center text-teal-700 mb-6">
             Register a Complaint
@@ -152,7 +159,7 @@ export default function CompReg() {
 
             {/* Image Uploads */}
             <div>
-              <label className="block text-teal-600 mb-1">Attach Image 1 (Optional)</label>
+              <label className="block text-teal-600 mb-1">Attach Image 1</label>
               <input type="file" accept="image/*" {...register('image1')} className="w-full" />
             </div>
             <div>
