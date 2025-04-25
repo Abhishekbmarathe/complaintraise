@@ -21,6 +21,7 @@ const ManageComplaints = () => {
                     params: { page: 0 },
                 });
                 if (response.data && response.data.status) {
+                    console.log("complaints== ", response.data.result)
                     setComplaints(response.data.result);
                 }
             } catch (error) {
@@ -46,34 +47,47 @@ const ManageComplaints = () => {
 
     const handleDelete = async (id, image1, image2, image3) => {
         const cnf = confirm("Are you sure to delete?");
+        const token = sessionStorage.getItem('TOKEN');
+        const user = JSON.parse(sessionStorage.getItem('USER'));
+        const username = user?.username;
+      
+        const requestData = {
+          id,
+          image1,
+          image2,
+          image3,
+        };
+      
+        const requestHeaders = {
+          "Content-Type": "application/json", // ✅ Add this!
+          TOKEN: token,
+          USERNAME: username,
+        };
+      
+        console.log("🛰️ API Endpoint:", `${api}complain`);
+        console.log("📦 Data being sent:", requestData);
+        console.log("🧾 Headers being sent:", requestHeaders);
+      
         if (cnf) {
-            try {
-                const token = sessionStorage.getItem('TOKEN');
-                const username = sessionStorage.getItem('username');
-
-                const response = await axios.delete(`${api}delete`, {
-                    headers: {
-                        TOKEN: token,
-                        username: username,
-                    },
-                    data: {
-                        id,
-                        image1,
-                        image2,
-                        image3,
-                    },
-                });
-
-                if (response.data.status === true) {
-                    setComplaints((prev) => prev.filter((c) => c.id !== id));
-                } else {
-                    console.warn('Failed to delete complaint:', response.data.message || 'Unknown error');
-                }
-            } catch (err) {
-                console.error('Error deleting complaint:', err);
+          try {
+            const response = await axios.delete(`${api}complain`, {
+              headers: requestHeaders,
+              data: requestData,
+            });
+      
+            if (response.data.status === true) {
+              setComplaints((prev) => prev.filter((c) => c.id !== id));
+            } else {
+              console.warn('Failed to delete complaint:', response.data.message || 'Unknown error');
             }
+          } catch (err) {
+            console.error('❌ Error deleting complaint:', err);
+          }
         }
-    };
+      };
+      
+      
+      
 
     return (
         <div className="min-h-screen p-6 bg-gray-100">

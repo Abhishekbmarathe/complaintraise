@@ -63,12 +63,12 @@ const Landing = () => {
       <div className="w-4/5 m-auto py-10 flex-grow">
         <h1 className="text-3xl font-bold text-left mb-8">All Registered Complaints</h1>
 
-        <div className="flex items-center gap-3 mt-4 mb-6 flex-wrap">
+        <div className="flex items-center gap-1 mt-4 mb-6 flex-wrap">
           {statuses.map((status) => (
             <button
               key={status}
               onClick={() => setSelectedStatus(status)}
-              className={`px-4 py-1 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-teal-400 transition ${
+              className={`px-3 py-1 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-teal-400 transition ${
                 selectedStatus === status
                   ? 'bg-teal-600 text-white hover:bg-teal-700'
                   : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
